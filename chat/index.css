@@ -1,0 +1,241 @@
+/* styles.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(92deg, #6a11cb66, #2575fc6e);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+  overflow: hidden;
+  touch-action: none;
+}
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  color: red;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 0%; 
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+.main-container{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.chat-header {
+  padding: 0px 16px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px 12px 0 0;
+  text-align: center;
+}
+.chat-header h2{
+  margin-block-start: 0;
+}
+.chat-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.chat-box {
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  height: 75vh;
+  overflow-x: hidden;
+  position: relative;
+  /* background: url('https://pic.netbian.com/uploads/allimg/250121/170119-1737450079d6a3.jpg') no-repeat center 62% / cover;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-size: contain;
+  background-color: #f9f9f9;
+  background-blend-mode: multiply; */
+}
+.chat-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95); 
+}
+.message-item {
+  display: flex;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+.message-item.user{
+  justify-content: flex-end;
+}
+.head-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+}
+.ai-icon.head-icon {
+  top: 0px;
+  left: -5px;
+}
+.user-icon.head-icon {
+  top: 0px;
+  right: -15px;;
+  order: 2;
+}
+.head-icon img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  top: 2px;
+}
+
+.message {
+  margin-bottom: 12px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  max-width: 70%;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+pre{
+  background-color: #fff;
+  color: #333;
+  order: 2;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px;
+}
+
+.user-message {
+  background-color: #007bff;
+  color: #fff;
+  order: 1;
+}
+.user-message::after{
+  content: '';
+  position: absolute;
+  right: -9.5px; /* 调整小三角位置 */
+  top: 10px; /* 调整小三角垂直位置 */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 10px; /* 调整小三角大小 */
+  border-color: transparent transparent transparent #007bff; /* 小三角颜色 */
+}
+
+.ai-message {
+  background-color: #e0e0e0;
+  color: #333;
+  left: 0;
+}
+.ai-message::before {
+  content: '';
+  position: absolute;
+  left: -10px; /* 调整小三角位置 */
+  top: 10px; /* 调整小三角垂直位置 */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 10px 8px 0; /* 调整小三角大小 */
+  border-color: transparent #e0e0e0 transparent transparent; /* 小三角颜色 */
+}
+.bottom-wrap{
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+  padding: 20px 10px 50px;
+}
+.input-area {
+  display: flex;
+}
+.change-model{
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-right: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+#loading-spinner {
+  font-size: 16px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

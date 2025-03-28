@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>琉璃Jasper Home</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-text">琉璃Jasper</span>
+                <div class="logo-decoration"></div>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#blog">博客</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <div class="hero-avatar">
+                    <img src="https://normal-database-1257734014.cos.ap-guangzhou.myqcloud.com/my_avatar.jpg" alt="个人头像">
+                    <div class="avatar-decoration"></div>
+                </div>
+                <h1>你好，我是<span class="highlight">琉璃Jasper</span></h1>
+                <p class="hero-subtitle">全栈开发工程师 / 产品设计师</p>
+                <p class="hero-description">专注于Web开发和人工智能领域，热爱创造优雅的用户体验</p>
+                <div class="hero-buttons">
+                    <button class="cta-button primary" onclick="scrollToProjects()">查看作品</button>
+                    <button class="cta-button secondary" onclick="scrollToContact()">联系我</button>
+                </div>
+                <div class="hero-social">
+                    <a href="https://github.com/jasperliu911" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:yolliujun@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=1102015906&site=qq&menu=yes" target="_blank" class="social-link">
+                        <i class="fab fa-qq"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>关于我</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>热爱编程，专注于Web开发和人工智能领域。喜欢探索新技术，享受创造的过程。</p>
+                </div>
+                <div class="skills-container">
+                    <h3>技能专长</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon">💻</div>
+                            <div class="skill-name">Web开发</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-lightbulb"></i></div>
+                            <div class="skill-name">产品设计</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">🎨</div>
+                            <div class="skill-name">UI设计</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="60"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">🤖</div>
+                            <div class="skill-name">人工智能</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="50"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="blog">
+            <h2>最新博客</h2>
+            <div class="blog-container">
+                <div class="blog-grid">
+                    <a href="https://jasperliu911.github.io/blog/vue3-composition-api" target="_blank" class="blog-link">
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://img.freepik.com/free-vector/programming-concept-illustration_114360-1351.jpg" alt="Vue3组合式API博客配图">
+                            </div>
+                            <div class="blog-content">
+                                <h3>深入理解Vue3组合式API</h3>
+                                <p class="blog-excerpt">探索Vue3组合式API的核心概念和最佳实践，带你了解如何更好地组织组件逻辑...</p>
+                                <div class="blog-meta">
+                                    <span class="blog-date">2024-03-15</span>
+                                    <span class="blog-category">前端开发</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                    <a href="https://jasperliu911.github.io/blog/ai-in-webdev" target="_blank" class="blog-link">
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7862.jpg" alt="AI在Web开发中的应用博客配图">
+                            </div>
+                            <div class="blog-content">
+                                <h3>AI在Web开发中的应用</h3>
+                                <p class="blog-excerpt">探讨人工智能技术如何改变现代Web开发流程，以及未来发展趋势...</p>
+                                <div class="blog-meta">
+                                    <span class="blog-date">2024-03-10</span>
+                                    <span class="blog-category">人工智能</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                    <a href="https://jasperliu911.github.io/blog/react-hooks" target="_blank" class="blog-link">
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://img.freepik.com/free-vector/react-js-development-illustration_114360-5271.jpg" alt="React Hooks博客配图">
+                            </div>
+                            <div class="blog-content">
+                                <h3>React Hooks最佳实践</h3>
+                                <p class="blog-excerpt">深入探讨React Hooks的使用技巧，以及如何避免常见陷阱...</p>
+                                <div class="blog-meta">
+                                    <span class="blog-date">2024-03-05</span>
+                                    <span class="blog-category">前端开发</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                    <a href="https://jasperliu911.github.io/blog/typescript-tips" target="_blank" class="blog-link">
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://img.freepik.com/free-vector/typescript-programming-language-illustration_114360-6678.jpg" alt="TypeScript技巧博客配图">
+                            </div>
+                            <div class="blog-content">
+                                <h3>TypeScript高级技巧</h3>
+                                <p class="blog-excerpt">分享一些实用的TypeScript技巧，让你的代码更加类型安全...</p>
+                                <div class="blog-meta">
+                                    <span class="blog-date">2024-02-28</span>
+                                    <span class="blog-category">前端开发</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                    <a href="https://jasperliu911.github.io/blog/nodejs-performance" target="_blank" class="blog-link">
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://img.freepik.com/free-vector/nodejs-development-illustration_114360-6679.jpg" alt="Node.js性能优化博客配图">
+                            </div>
+                            <div class="blog-content">
+                                <h3>Node.js性能优化指南</h3>
+                                <p class="blog-excerpt">探讨Node.js应用性能优化的各种技巧和最佳实践...</p>
+                                <div class="blog-meta">
+                                    <span class="blog-date">2024-02-20</span>
+                                    <span class="blog-category">后端开发</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <h2>我的项目</h2>
+            <div class="project-grid">
+                <a href="https://jasperliu911.github.io/chat/" target="_blank" class="project-link">
+                    <div class="project-card">
+                        <div class="project-icon"><i class="fas fa-robot"></i></div>
+                        <h3>融合型对话机器人</h3>
+                        <p class="project-description">支持接入DeepSeek-V3模型和混元-T1双模型对话式AI</p>
+                        <div class="project-tech">
+                            <span>DeepSeek</span>
+                            <span>Hunyuan</span>
+                            <span>对话式AI</span>
+                            <span>自研模型</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="project-link">
+                    <div class="project-card">
+                        <div class="project-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h3>可视化工作流</h3>
+                        <p class="project-description">基于 AntdX6 Flow 的工作流设计器，支持自定义节点、连线规则和流程验证。</p>
+                        <div class="project-tech">
+                            <span>Vue</span>
+                            <span>Antd x6</span>
+                            <span>节点增强配置</span>
+                            <span>工作流</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="project-link">
+                    <div class="project-card">
+                        <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>支持动态图表markDown</h3>
+                        <p class="project-description">增强型 Markdown 编辑器，支持实时渲染动态图表，集成多种数据可视化组件。</p>
+                        <div class="project-tech">
+                            <span>Vue3</span>
+                            <span>ECharts</span>
+                            <span>Markdown-it</span>
+                            <span>自定义语法</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>联系我</h2>
+            <div class="contact-content">
+                <p>您可以通过以下方式联系我：</p>
+                <ul>
+                    <li>邮箱：<a href="mailto:yolliujun@gmail.com">yolliujun@gmail.com</a></li>
+                    <li>GitHub：<a href="https://github.com/jasperliu911" target="_blank">https://github.com/jasperliu911</a></li>
+                    <li>QQ：<a href="http://wpa.qq.com/msgrd?v=3&uin=1102015906&site=qq&menu=yes" target="_blank">1102015906</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JasperLiu. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html> 
