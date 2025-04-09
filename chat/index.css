@@ -19,6 +19,8 @@ body {
   width: 100%;
   padding: 0;
   color: red;
+  position: fixed;
+  top: 30px;
 }
 
 .marquee span {
@@ -42,12 +44,28 @@ body {
   bottom: 0;
 }
 .chat-header {
-  padding: 0px 16px;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   border-radius: 12px 12px 0 0;
   text-align: center;
+}
+.chat-header .logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+.chat-header .logo .fa-robot {
+  font-size: 24px;
+  margin-right: 18px;
+  position: relative;
+  top: -10px;
 }
 .chat-header h2{
   margin-block-start: 0;
@@ -68,14 +86,8 @@ body {
   overflow-y: auto;
   background-color: #f9f9f9;
   height: 75vh;
-  overflow-x: hidden;
+  overflow-x: auto;
   position: relative;
-  /* background: url('https://pic.netbian.com/uploads/allimg/250121/170119-1737450079d6a3.jpg') no-repeat center 62% / cover;
-  background-size: 100% 100%;
-  background-attachment: fixed;
-  background-size: contain;
-  background-color: #f9f9f9;
-  background-blend-mode: multiply; */
 }
 .chat-box::before {
   content: '';
@@ -113,21 +125,25 @@ body {
   right: -15px;;
   order: 2;
 }
-.head-icon img{
+.head-icon img,.head-icon svg{
   width: 30px;
   height: 30px;
   border-radius: 50%;
   position: relative;
-  top: 2px;
+  top: 5px;
 }
 
 .message {
   margin-bottom: 12px;
   padding: 10px 16px;
   border-radius: 12px;
-  max-width: 70%;
+  max-width: 80%;
   position: relative;
   animation: fadeIn 0.3s ease-in-out;
+}
+.message p{
+  margin: 0;
+  padding: 0;
 }
 pre{
   background-color: #fff;
@@ -186,6 +202,10 @@ pre{
 .change-model{
   margin-bottom: 10px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 input[type="text"] {
@@ -238,4 +258,250 @@ button:hover {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+/* 添加以下CSS到你的index.css文件中 */
+
+/* 配置按钮样式 */
+.config-button {
+  background-color: var(--primary-color, #4f46e5);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: absolute;
+  right: 10px;
+}
+
+.config-button:hover {
+  background-color: var(--secondary-color, #818cf8);
+}
+
+/* 模态框样式 */
+.config-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.config-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.config-list {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.config-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.config-key, .config-value {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.add-btn, .save-btn, .reset-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.add-btn {
+  background-color: #10b981;
+}
+
+.save-btn {
+  background-color: #3b82f6;
+}
+
+.reset-btn {
+  background-color: #f59e0b;
+}
+
+.add-btn:hover, .save-btn:hover, .reset-btn:hover {
+  opacity: 0.9;
+}
+
+
+/* 添加或修改以下CSS样式 */
+.system-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.system-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* 添加角色选择下拉框样式 */
+.role-select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.role-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.role-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 10px 0;
+}
+
+.role-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.role-label {
+  flex: none !important;
+  width: 40px;
+  padding: 5px;
+}
+
+.role-prompt {
+  flex: 1;
+  min-height: 60px;
+  padding: 5px;
+  resize: vertical;
+}
+
+.manage-roles-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.manage-roles-btn:hover {
+  background-color: #45a049;
+}
+
+.reasoning-toggle {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.reasoning-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.reasoning-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.reasoning-content {
+  max-width: 85%;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.reasoning-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+.reasoning-body {
+  color: #666;
+  line-height: 1.6;
+}
+
+.reasoning-body pre {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.reasoning-body code {
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
 }
