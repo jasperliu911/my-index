@@ -34,22 +34,40 @@ body {
 .chat-box {
   padding: 16px;
   overflow-y: auto;
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.9);
   height: calc(100vh - 180px); /* 动态计算高度 */
   overflow-x: auto;
   position: relative;
   -webkit-overflow-scrolling: touch; /* 增加iOS滚动流畅度 */
 }
 
-/* 调整底部输入区域，确保不会被键盘遮挡 */
+/* 调整底部输入区域，确保不会被键盘和浏览器导航栏遮挡 */
 .bottom-wrap {
-  width: 96vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border-top: 1px solid #e0e0e0;
   background-color: #fff;
-  padding: 10px 10px 20px; /* 减小底部padding */
+  padding: 10px 10px env(safe-area-inset-bottom, 10px); /* 使用环境变量适配底部安全区域 */
   z-index: 10;
+  position: sticky;
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+/* 添加媒体查询，针对不同设备进行特殊处理 */
+@media screen and (max-width: 768px) {
+  /* 在移动设备上调整底部区域 */
+  .bottom-wrap {
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+  }
+  
+  /* 微信浏览器特殊处理 */
+  @supports (-webkit-overflow-scrolling: touch) {
+    .bottom-wrap {
+      padding-bottom: 15px; /* 微信浏览器底部padding */
+    }
+  }
 }
 
 /* 调整推理内容区域，确保在移动设备上不会太宽 */
@@ -60,8 +78,6 @@ body {
   border: 1px solid #eee;
   border-radius: 4px;
   font-size: 14px;
-  margin-left: 40px; /* 添加左边距，与消息对齐 */
-  box-sizing: border-box; /* 确保padding不会增加宽度 */
 }
 
 /* 添加媒体查询，针对小屏幕设备进行特殊处理 */
@@ -72,11 +88,6 @@ body {
   
   .message {
     max-width: 75%; /* 在小屏幕上减小消息宽度 */
-  }
-  
-  .reasoning-content {
-    max-width: 75%;
-    margin-left: 35px;
   }
   
   .bottom-wrap {
@@ -182,19 +193,9 @@ body {
 .chat-box {
   padding: 16px;
   overflow-y: auto;
-  background-color: #f9f9f9;
   height: 75vh;
   overflow-x: auto;
   position: relative;
-}
-.chat-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.95); 
 }
 .message-item {
   display: flex;
@@ -235,7 +236,7 @@ body {
   margin-bottom: 12px;
   padding: 10px 16px;
   border-radius: 12px;
-  max-width: 80%;
+  max-width: 85%;
   position: relative;
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -407,13 +408,46 @@ button:hover {
   position: relative;
 }
 
-.close-btn {
+.copy-btn {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
   color: #666;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 3;
+}
+
+.message:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* 复制成功提示样式 */
+.copy-success {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1000;
+  animation: fadeInOut 1.5s ease-in-out;
 }
 
 .config-list {
@@ -572,15 +606,6 @@ button:hover {
   background-color: #e0e0e0;
 }
 
-.reasoning-content {
-  max-width: 85%;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
 .reasoning-header {
   font-weight: bold;
   margin-bottom: 10px;
@@ -602,4 +627,176 @@ button:hover {
 
 .reasoning-body code {
   font-family: Consolas, Monaco, 'Andale Mono', monospace;
+}
+
+/* 工厂设置相关样式 */
+#factory-settings-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#factory-settings-icon:hover {
+  transform: rotate(45deg);
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.password-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.factory-section {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.factory-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.factory-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+/* 添加 AI 思考和打字效果样式 */
+.thinking-indicator {
+  display: flex;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.thinking-dots {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 10px 16px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.thinking-dots::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 10px 8px 0;
+  border-color: transparent #e0e0e0 transparent transparent;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #666;
+  margin: 0 3px;
+  opacity: 0.6;
+  animation: dot-pulse 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* 打字机效果 */
+.typing-effect {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1s steps(40, end);
+  animation-fill-mode: forwards;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* 增强发送按钮的反馈效果 */
+#send-btn.sending {
+  background-color: #0056b3;
+  transform: scale(0.95);
+}
+
+/* 增加消息发送后的视觉反馈 */
+.message-sent-feedback {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+  opacity: 0;
+  animation: fadeInOut 2s ease-in-out;
+  position: absolute;
+  bottom: -5px;
+  right: 48px;
+}
+.message-sent-feedback.thinking-feedback {
+  position: absolute;
+  bottom: -18px;
+  left: 48px;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+/* 思考中提示语样式 */
+.thinking-feedback {
+  position: relative;
+  left: 40px;
+  text-align: left;
+  margin-top: 5px;
+  color: #666;
+  font-size: 12px;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.ai-rely-wrap{
+  display: flex;
+  flex-direction: column;
 }
