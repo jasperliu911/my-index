@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let aiResponse = null;
             let reasoningContent = null;
 
-            if (modelSelect === 'deepseek-v3' || modelSelect === 'deepseek-r1') {
+            if (modelSelect === 'deepseek-v3.2' || modelSelect === 'deepseek-r1') {
                 const dsResponse = await callDSAPI(modelSelect);
                 aiResponse = dsResponse.content;
                 // 如果是 deepseek-r1 模型，获取推理内容
@@ -172,7 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // 添加AI回复到历史记录
             chatHistory.push({ role: 'assistant', content: replyResponse });
 
-            appendMessage(replyResponse, 'ai', reasoningContent);
+            // 创建一个 AI 消息占位（streaming 模式），并模拟流式输出
+            const aiMessageDom = appendMessage('', 'ai', reasoningContent, true);
+            streamTextToDom(replyResponse, aiMessageDom, reasoningContent);
         } catch (error) {
             // 移除思考指示器
             if (thinkingIndicator.parentNode === chatBox) {
@@ -817,6 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 model: modelName,
                 messages: messages,
                 temperature: 1.3,
+                stream: false
             }),
         });
 
