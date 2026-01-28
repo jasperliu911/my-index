@@ -1,0 +1,802 @@
+/* styles.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(92deg, #6a11cb66, #2575fc6e);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+  overflow: hidden;
+  touch-action: manipulation; /* 改为 manipulation 以允许基本触摸操作 */
+}
+
+/* 调整容器大小，确保在小屏幕上也能完整显示 */
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 调整主容器位置，防止被底部导航栏遮挡 */
+.main-container {
+  width: 100%;
+  height: calc(100% - 50px); /* 减去头部高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* 调整聊天框高度，确保在小屏幕上也能显示足够内容 */
+.chat-box {
+  padding: 16px;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  height: calc(100vh - 180px); /* 动态计算高度 */
+  overflow-x: auto;
+  position: relative;
+  -webkit-overflow-scrolling: touch; /* 增加iOS滚动流畅度 */
+}
+
+/* 调整底部输入区域，确保不会被键盘和浏览器导航栏遮挡 */
+.bottom-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+  padding: 10px 10px env(safe-area-inset-bottom, 10px); /* 使用环境变量适配底部安全区域 */
+  z-index: 10;
+  position: sticky;
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+/* 添加媒体查询，针对不同设备进行特殊处理 */
+@media screen and (max-width: 768px) {
+  /* 在移动设备上调整底部区域 */
+  .bottom-wrap {
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+  }
+  
+  /* 微信浏览器特殊处理 */
+  @supports (-webkit-overflow-scrolling: touch) {
+    .bottom-wrap {
+      padding-bottom: 15px; /* 微信浏览器底部padding */
+    }
+  }
+}
+
+/* 调整推理内容区域，确保在移动设备上不会太宽 */
+.reasoning-content {
+  max-width: 85%;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* 添加媒体查询，针对小屏幕设备进行特殊处理 */
+@media screen and (max-width: 768px) {
+  .chat-box {
+    height: calc(100vh - 160px);
+  }
+  
+  .message {
+    max-width: 75%; /* 在小屏幕上减小消息宽度 */
+  }
+  
+  .bottom-wrap {
+    padding: 10px 10px 10px;
+  }
+  
+  input[type="text"] {
+    font-size: 16px; /* 防止iOS自动缩放 */
+  }
+  
+  /* 确保模态框在移动设备上也能正常显示 */
+  .config-modal-content {
+    width: 90%;
+    max-height: 70vh;
+    padding: 15px;
+  }
+}
+
+/* 针对超小屏幕设备的额外调整 */
+@media screen and (max-width: 375px) {
+  .chat-box {
+    height: calc(100vh - 150px);
+  }
+  
+  .message {
+    max-width: 70%;
+  }
+  
+  .head-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .head-icon img, .head-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  color: red;
+  position: fixed;
+  top: 30px;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 0%; 
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+.chat-header {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px 12px 0 0;
+  text-align: center;
+}
+.chat-header .logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+.chat-header .logo .fa-robot {
+  font-size: 24px;
+  margin-right: 18px;
+  position: relative;
+  top: -10px;
+}
+.chat-header h2{
+  margin-block-start: 0;
+}
+.chat-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.chat-box {
+  padding: 16px;
+  overflow-y: auto;
+  height: 75vh;
+  overflow-x: auto;
+  position: relative;
+}
+.message-item {
+  display: flex;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+.message-item.user{
+  justify-content: flex-end;
+}
+.head-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+}
+.ai-icon.head-icon {
+  top: 0px;
+  left: -5px;
+}
+.user-icon.head-icon {
+  top: 0px;
+  right: -15px;;
+  order: 2;
+}
+.head-icon img,.head-icon svg{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  top: 5px;
+}
+
+.message {
+  margin-bottom: 12px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  max-width: 85%;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+.message p{
+  margin: 0;
+  padding: 0;
+}
+pre{
+  background-color: #fff;
+  color: #333;
+  order: 2;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px;
+}
+
+.user-message {
+  background-color: #007bff;
+  color: #fff;
+  order: 1;
+}
+.user-message::after{
+  content: '';
+  position: absolute;
+  right: -9.5px; /* 调整小三角位置 */
+  top: 10px; /* 调整小三角垂直位置 */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 10px; /* 调整小三角大小 */
+  border-color: transparent transparent transparent #007bff; /* 小三角颜色 */
+}
+
+.ai-message {
+  background-color: #e0e0e0;
+  color: #333;
+  left: 0;
+}
+.ai-message::before {
+  content: '';
+  position: absolute;
+  left: -10px; /* 调整小三角位置 */
+  top: 10px; /* 调整小三角垂直位置 */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 10px 8px 0; /* 调整小三角大小 */
+  border-color: transparent #e0e0e0 transparent transparent; /* 小三角颜色 */
+}
+.bottom-wrap{
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+  padding: 20px 10px 10px;
+}
+.input-area {
+  display: flex;
+}
+.change-model{
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-right: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+#loading-spinner {
+  font-size: 16px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+/* 添加以下CSS到你的index.css文件中 */
+
+/* 配置按钮样式 */
+.config-button {
+  background-color: var(--primary-color, #4f46e5);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: absolute;
+  right: 10px;
+}
+
+.config-button:hover {
+  background-color: var(--secondary-color, #818cf8);
+}
+
+/* 模态框样式 */
+.config-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.config-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 3;
+}
+
+.message:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* 复制成功提示样式 */
+.copy-success {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1000;
+  animation: fadeInOut 1.5s ease-in-out;
+}
+
+.config-list {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.config-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.config-key, .config-value {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.add-btn, .save-btn, .reset-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.add-btn {
+  background-color: #10b981;
+}
+
+.save-btn {
+  background-color: #3b82f6;
+}
+
+.reset-btn {
+  background-color: #f59e0b;
+}
+
+.add-btn:hover, .save-btn:hover, .reset-btn:hover {
+  opacity: 0.9;
+}
+
+
+/* 添加或修改以下CSS样式 */
+.system-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.system-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* 添加角色选择下拉框样式 */
+.role-select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.role-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.role-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 10px 0;
+}
+
+.role-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.role-label {
+  flex: none !important;
+  width: 40px;
+  padding: 5px;
+}
+
+.role-prompt {
+  flex: 1;
+  min-height: 60px;
+  padding: 5px;
+  resize: vertical;
+}
+
+.manage-roles-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.manage-roles-btn:hover {
+  background-color: #45a049;
+}
+
+.reasoning-toggle {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.reasoning-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.reasoning-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.reasoning-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+.reasoning-body {
+  color: #666;
+  line-height: 1.6;
+}
+
+.reasoning-body pre {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.reasoning-body code {
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+}
+
+/* 工厂设置相关样式 */
+#factory-settings-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#factory-settings-icon:hover {
+  transform: rotate(45deg);
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.password-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.factory-section {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.factory-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.factory-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+/* 添加 AI 思考和打字效果样式 */
+.thinking-indicator {
+  display: flex;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.thinking-dots {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 10px 16px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.thinking-dots::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 10px 8px 0;
+  border-color: transparent #e0e0e0 transparent transparent;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #666;
+  margin: 0 3px;
+  opacity: 0.6;
+  animation: dot-pulse 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* 打字机效果 */
+.typing-effect {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1s steps(40, end);
+  animation-fill-mode: forwards;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* 增强发送按钮的反馈效果 */
+#send-btn.sending {
+  background-color: #0056b3;
+  transform: scale(0.95);
+}
+
+/* 增加消息发送后的视觉反馈 */
+.message-sent-feedback {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+  opacity: 0;
+  animation: fadeInOut 2s ease-in-out;
+  position: absolute;
+  bottom: -5px;
+  right: 48px;
+}
+.message-sent-feedback.thinking-feedback {
+  position: absolute;
+  bottom: -18px;
+  left: 48px;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+/* 思考中提示语样式 */
+.thinking-feedback {
+  position: relative;
+  left: 40px;
+  text-align: left;
+  margin-top: 5px;
+  color: #666;
+  font-size: 12px;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.ai-rely-wrap{
+  display: flex;
+  flex-direction: column;
+}
